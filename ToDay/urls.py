@@ -15,7 +15,18 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from rest_framework import routers
+from SimpleQuiz.views import QuestionHeaderViewSet, QuestionsViewSet
+from django.conf.urls import url, include
+from ThemedQuiz.views import DayThemeViewSet
+
+
+router = routers.DefaultRouter()
+router.register(r'marathon-header', QuestionHeaderViewSet)
+router.register(r'marathon-questions', QuestionsViewSet)
+router.register(r'theme-questions', DayThemeViewSet)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^rest/', include(router.urls)),
 ]

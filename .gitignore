@@ -94,3 +94,8 @@ EnvToDay/
 .DS_Store
 .gitignore
 .idea/
+Account/migrations/
+SimpleQuiz/migrations/
+ThemedQuiz/migrations/
+db.sqlite3
+
