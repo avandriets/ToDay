@@ -1,13 +1,11 @@
-from django.shortcuts import render
-from rest_framework import permissions
-from rest_framework import viewsets
 from rest_framework import filters
+from rest_framework import permissions
 from rest_framework import status
-from rest_framework.decorators import detail_route, list_route
+from rest_framework import viewsets
+from rest_framework.decorators import list_route
 from rest_framework.response import Response
 from SimpleQuiz.models import QuestionHeader, Questions
 from SimpleQuiz.serializers import QuestionHeaderSerializer, QuestionsSerializer
-from ToDay.permission import IsOwnerOrReadOnly
 
 
 class QuestionHeaderViewSet(viewsets.ModelViewSet):
@@ -68,4 +66,3 @@ class QuestionsViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(language='E')
 
         return queryset
-
