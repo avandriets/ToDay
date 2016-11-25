@@ -25,4 +25,4 @@ class DayQuestionHeaderSerializer(serializers.ModelSerializer):
 class DayQuestionsSerializer(serializers.ModelSerializer):
     class Meta:
         model = DayQuestions
-        fields = ('id', 'header', 'language', 'question', 'answer1', 'answer2', 'right_answer', 'created_at', 'updated_at',)
+        fields = ('id', 'header', 'language', 'question', 'answer1', 'answer2', 'right_answer', 'description', 'created_at', 'updated_at',)

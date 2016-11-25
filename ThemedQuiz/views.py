@@ -43,7 +43,7 @@ class DayThemeViewSet(viewsets.ModelViewSet):
         if target_theme.count() == 0:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
-        if p_language is None or p_language != 'E' or p_language != 'R':
+        if p_language is None or p_language not in ['E','R']:
             p_language = 'E'
 
         theme_translation = DayThemeTranslation.objects.filter(language=p_language, theme=target_theme[0])
@@ -63,7 +63,7 @@ class DayThemeViewSet(viewsets.ModelViewSet):
     @list_route(methods=['get'], url_path='get-changed-theme-questions/(?P<p_language>[A-Z]+)')
     def get_changed_themes_questions(self, request, p_language=None):
 
-        if p_language is None or p_language != 'E' or p_language != 'R':
+        if p_language is None or p_language not in ['E','R']:
             p_language = 'E'
 
         today = datetime.datetime.today()
