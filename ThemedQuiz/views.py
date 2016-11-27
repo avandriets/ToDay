@@ -52,7 +52,7 @@ class DayThemeViewSet(viewsets.ModelViewSet):
             questions_by_language = DayQuestions.objects.filter(header__active=True, language=p_language, header__theme=target_theme[0])
             if questions_by_language.count() > 0:
 
-                serializer_theme = DayThemeTranslationSerializer(theme_translation, many=True)
+                serializer_theme = DayThemeTranslationSerializer(theme_translation[0])
                 serializer_question = DayQuestionsSerializer(questions_by_language, many=True)
                 return Response({ "theme": serializer_theme.data, "questions": serializer_question.data})
             else:
