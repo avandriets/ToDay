@@ -5,16 +5,17 @@ from ThemedQuiz.models import DayTheme, DayThemeTranslation, DayQuestionHeader, 
 class DayThemeSerializer(serializers.ModelSerializer):
     class Meta:
         model = DayTheme
-        fields = ('id', 'target_date', 'active', 'imageURL', 'description', 'created_at', 'updated_at',)
+        fields = ('id', 'target_date','main_theme', 'active', 'imageURL', 'description', 'created_at', 'updated_at',)
 
 
 class DayThemeTranslationSerializer(serializers.ModelSerializer):
     theme_image = serializers.FileField(source='theme.imageURL', required=False)
     target_date = serializers.DateField(source='theme.target_date', required=False)
+    main_theme = serializers.BooleanField(source='theme.main_theme', required=False)
 
     class Meta:
         model = DayThemeTranslation
-        fields = ('theme_image','target_date', 'id', 'language', 'name', 'description', 'created_at', 'updated_at',)
+        fields = ('theme_image','target_date', 'main_theme', 'id', 'language', 'name', 'description', 'created_at', 'updated_at',)
 
 
 class DayQuestionHeaderSerializer(serializers.ModelSerializer):

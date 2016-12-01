@@ -17,6 +17,7 @@ class DayTheme(models.Model):
     target_date = models.DateField(verbose_name='Дата темы', help_text='Дата с которой будет активна тема')
     imageURL = models.FileField(verbose_name='Изображение', null=True, blank=True)
     active = models.BooleanField(default=False, verbose_name='Опубликовано', help_text='Установите флаг для публикации темы')
+    main_theme = models.BooleanField(default=False, verbose_name='Тема дня', help_text='Установите флаг для отметки темы как главной за день')
     description = models.CharField(verbose_name='Описание', max_length=500, help_text='Короткое описание темы')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

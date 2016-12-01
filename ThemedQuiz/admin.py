@@ -14,7 +14,7 @@ class DayThemeTranslationAdminInline(admin.TabularInline):
 
 
 class DayThemeAdmin(admin.ModelAdmin):
-    list_display = ('target_date', 'active', 'imageURL', 'description', 'owner', 'created_at', 'updated_at')
+    list_display = ('target_date', 'main_theme', 'active', 'imageURL', 'description', 'owner', 'created_at', 'updated_at')
     list_filter = ('active', 'owner',)
     search_fields = ['description', ]
     inlines = [
