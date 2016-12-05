@@ -10,12 +10,17 @@ class DayThemeSerializer(serializers.ModelSerializer):
 
 class DayThemeTranslationSerializer(serializers.ModelSerializer):
     theme_image = serializers.FileField(source='theme.imageURL', required=False)
+    theme_background_image = serializers.FileField(source=
+                                                   'theme.backgroundImageURL',
+                                                   required=False)
     target_date = serializers.DateField(source='theme.target_date', required=False)
     main_theme = serializers.BooleanField(source='theme.main_theme', required=False)
 
     class Meta:
         model = DayThemeTranslation
-        fields = ('theme_image','target_date', 'main_theme', 'id', 'language', 'name', 'description', 'created_at', 'updated_at',)
+        fields = ('theme_image', 'theme_background_image', 'target_date',
+                  'main_theme', 'id',
+                  'language', 'name', 'description', 'created_at', 'updated_at',)
 
 
 class DayQuestionHeaderSerializer(serializers.ModelSerializer):
