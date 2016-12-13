@@ -28,7 +28,7 @@ class QuestionHeaderViewSet(viewsets.ModelViewSet):
     @list_route(methods=['get'], url_path='get-questions/(?P<p_language>[A-Z]+)')
     def get_questions(self, request, p_language=None):
 
-        if p_language is None or p_language != 'E' or p_language != 'R':
+        if p_language is None or p_language not in ['E','R']:
             p_language = 'E'
 
         questions_by_language = Questions.objects.filter(language=p_language, header__active=True)
