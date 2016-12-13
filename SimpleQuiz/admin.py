@@ -11,16 +11,16 @@ from SimpleQuiz.models import Questions, QuestionHeader
 #     list_display_links = ('country', 'name', 'created_at', 'updated_at')
 #     list_filter = ('country',)
 
-class QuestionsAdmin(admin.ModelAdmin):
-    list_display = ('language', 'question', 'answer1', 'answer2', 'right_answer', 'owner', 'created_at',)
-    list_filter = ('language', 'owner',)
-    search_fields = ['question', 'answer1', 'answer2', ]
-    model = Questions
-
-    def save_model(self, request, obj, form, change):
-        if getattr(obj, 'owner', None) is None:
-            obj.owner = request.user
-        obj.save()
+# class QuestionsAdmin(admin.ModelAdmin):
+#     list_display = ('language', 'question', 'answer1', 'answer2', 'right_answer', 'owner', 'created_at',)
+#     list_filter = ('language', 'owner',)
+#     search_fields = ['question', 'answer1', 'answer2', ]
+#     model = Questions
+#
+#     def save_model(self, request, obj, form, change):
+#         if getattr(obj, 'owner', None) is None:
+#             obj.owner = request.user
+#         obj.save()
 
 
 class QuestionsAdminInline(admin.TabularInline):
@@ -61,4 +61,4 @@ class HeaderQuestionAdmin(admin.ModelAdmin):
         formset.save_m2m()
 
 admin.site.register(QuestionHeader, HeaderQuestionAdmin)
-admin.site.register(Questions, QuestionsAdmin)
+# admin.site.register(Questions, QuestionsAdmin)

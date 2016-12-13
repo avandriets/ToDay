@@ -28,8 +28,8 @@ class QuestionHeader(models.Model):
     objects = QuestionHeaderManager()
 
     class Meta:
-        verbose_name = 'Группы вопросов'
-        verbose_name_plural = 'Группы вопросов'
+        verbose_name = 'Вопросы для викторины'
+        verbose_name_plural = 'Вопросы для викторины'
 
 
 class Questions(models.Model):

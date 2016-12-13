@@ -69,7 +69,7 @@ class DayQuestions(models.Model):
     answer1 = models.TextField(verbose_name='Ответ 1', max_length=500, help_text='Ответ 1')
     answer2 = models.TextField(verbose_name='Ответ 2', max_length=500, help_text='Ответ 2')
     right_answer = models.IntegerField(choices=ANSWER)
-    description = models.TextField(null=True, blank=True, verbose_name='Описание', max_length=500, help_text='Описание')
+    description = models.TextField(null=True, blank=True, verbose_name='Описание', max_length=1000, help_text='Описание')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     owner = models.ForeignKey(Account, null=True, blank=True, related_name='day_question_body_owner')
