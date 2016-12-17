@@ -14,7 +14,7 @@ class DayThemeTranslationAdminInline(admin.TabularInline):
 
 
 class DayThemeAdmin(admin.ModelAdmin):
-    list_display = ('target_date', 'main_theme', 'active', 'imageURL',
+    list_display = ('id', 'target_date', 'main_theme', 'active', 'imageURL',
                     'backgroundImageURL',
                     'description', 'owner', 'created_at', 'updated_at')
     list_filter = ('active', 'owner',)
@@ -40,7 +40,7 @@ class DayThemeAdmin(admin.ModelAdmin):
 
 
 class ThemeQuestionAdmin(admin.TabularInline):
-    list_display = ('language', 'question', 'answer1', 'answer2', 'right_answer', 'description')
+    list_display = ('id', 'language', 'question', 'answer1', 'answer2', 'right_answer', 'description')
     formfield_overrides = {
         models.TextField: {'widget': Textarea(attrs={'rows': 4, 'cols': 30})},
     }
@@ -48,7 +48,7 @@ class ThemeQuestionAdmin(admin.TabularInline):
 
 
 class ThemeQuestionHeaderAdmin(admin.ModelAdmin):
-    list_display = ('theme', 'active', 'description', 'created_at', 'updated_at', 'owner', )
+    list_display = ('id', 'theme', 'active', 'description', 'created_at', 'updated_at', 'owner', )
     list_filter = ('active', 'owner', 'theme',)
     search_fields = ['description', ]
 

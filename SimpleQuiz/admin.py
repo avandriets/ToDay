@@ -37,7 +37,7 @@ class QuestionsAdminInline(admin.TabularInline):
 
 
 class HeaderQuestionAdmin(admin.ModelAdmin):
-    list_display = ('description', 'active', 'owner', 'created_at', 'updated_at')
+    list_display = ('id', 'description', 'active', 'owner', 'created_at', 'updated_at')
     list_filter = ('description', 'active', 'owner',)
     search_fields = ['description', 'created_at']
     inlines = [

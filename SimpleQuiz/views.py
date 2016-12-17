@@ -1,3 +1,4 @@
+import datetime
 from rest_framework import filters
 from rest_framework import permissions
 from rest_framework import status
@@ -32,6 +33,36 @@ class QuestionHeaderViewSet(viewsets.ModelViewSet):
             p_language = 'E'
 
         questions_by_language = Questions.objects.filter(language=p_language, header__active=True)
+        if questions_by_language.count() > 0:
+
+            serializer = QuestionsSerializer(questions_by_language, many=True)
+            return Response(serializer.data)
+
+        else:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+    @list_route(methods=['get'], url_path='get-changed-questions/(?P<p_language>[A-Z]+)')
+    def get_changed_questions(self, request, p_language=None):
+
+        today = datetime.datetime.today()
+
+        day_val = self.request.query_params.get('day', None)
+        month_val = self.request.query_params.get('month', None)
+        year_val = self.request.query_params.get('year', None)
+
+        try:
+            if day_val is not None and month_val is not None and year_val is not None:
+                max_change_date = datetime.date(year=int(year_val), month=int(month_val), day=int(day_val))
+            else:
+                max_change_date = datetime.date(year=today.year, month=today.month, day=today.day)
+
+        except ValueError:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        if p_language is None or p_language not in ['E','R']:
+            p_language = 'E'
+
+        questions_by_language = Questions.objects.filter(updated_at__gte=max_change_date, language=p_language, header__active=True)
         if questions_by_language.count() > 0:
 
             serializer = QuestionsSerializer(questions_by_language, many=True)
