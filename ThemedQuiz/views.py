@@ -114,12 +114,14 @@ class DayThemeViewSet(viewsets.ModelViewSet):
         changed_themes = []
         for theme in theme_list:
             theme_translation = DayThemeTranslation.objects.filter(language=p_language, theme=theme)
-            questions_by_language = DayQuestions.objects.filter(header__active=True, language=p_language, header__theme=theme)
 
-            serializer_theme = DayThemeTranslationSerializer(theme_translation, many=True)
-            serializer_question = DayQuestionsSerializer(questions_by_language, many=True)
+            if theme_translation.count() > 0:
+                questions_by_language = DayQuestions.objects.filter(header__active=True, language=p_language, header__theme=theme)
 
-            changed_themes.append({"theme": serializer_theme.data, "questions": serializer_question.data})
+                if questions_by_language.count() > 0:
+                    serializer_theme = DayThemeTranslationSerializer(theme_translation[0])
+                    serializer_question = DayQuestionsSerializer(questions_by_language, many=True)
+                    changed_themes.append({"theme": serializer_theme.data, "questions": serializer_question.data})
 
         if len(changed_themes) > 0:
             return Response(changed_themes)
@@ -167,12 +169,14 @@ class DayThemeViewSet(viewsets.ModelViewSet):
         changed_themes = []
         for theme in theme_list:
             theme_translation = DayThemeTranslation.objects.filter(language=p_language, theme=theme)
-            questions_by_language = DayQuestions.objects.filter(header__active=True, language=p_language, header__theme=theme)
 
-            serializer_theme = DayThemeTranslationSerializer(theme_translation, many=True)
-            serializer_question = DayQuestionsSerializer(questions_by_language, many=True)
+            if theme_translation.count() > 0:
+                questions_by_language = DayQuestions.objects.filter(header__active=True, language=p_language, header__theme=theme)
 
-            changed_themes.append({"theme": serializer_theme.data, "questions": serializer_question.data})
+                if questions_by_language.count() > 0:
+                    serializer_theme = DayThemeTranslationSerializer(theme_translation[0])
+                    serializer_question = DayQuestionsSerializer(questions_by_language, many=True)
+                    changed_themes.append({"theme": serializer_theme.data, "questions": serializer_question.data})
 
         if len(changed_themes) > 0:
             return Response(changed_themes)
