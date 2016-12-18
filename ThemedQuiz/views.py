@@ -126,8 +126,8 @@ class DayThemeViewSet(viewsets.ModelViewSet):
         else:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
-    @list_route(methods=['get'], url_path='get-theme-questions/(?P<p_language>[A-Z]+)')
-    def get_themes_questions(self, request, p_language=None):
+    @list_route(methods=['get'], url_path='get-theme-questions-interval/(?P<p_language>[A-Z]+)')
+    def get_themes_questions_by_interval(self, request, p_language=None):
 
         if p_language is None or p_language not in ['E', 'R']:
             p_language = 'E'
