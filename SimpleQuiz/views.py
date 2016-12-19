@@ -59,7 +59,7 @@ class QuestionHeaderViewSet(viewsets.ModelViewSet):
             time_stamp_val = float(self.request.query_params.get('update_time_stamp', None))
 
             if time_stamp_val is not None:
-                max_change_date = datetime.datetime.fromtimestamp(time_stamp_val)
+                max_change_date = datetime.datetime.fromtimestamp(time_stamp_val/1e3)
             else:
                 max_change_date = datetime.date(year=today.year, month=today.month, day=today.day)
 

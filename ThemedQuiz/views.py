@@ -90,7 +90,7 @@ class DayThemeViewSet(viewsets.ModelViewSet):
             time_stamp_val = float(self.request.query_params.get('update_time_stamp', None))
 
             if time_stamp_val is not None:
-                date_value = datetime.datetime.fromtimestamp(time_stamp_val)
+                date_value = datetime.datetime.fromtimestamp(time_stamp_val/1e3)
             else:
                 date_value = datetime.date(year=today.year, month=today.month, day=today.day)
 
