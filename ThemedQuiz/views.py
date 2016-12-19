@@ -72,19 +72,27 @@ class DayThemeViewSet(viewsets.ModelViewSet):
 
         today = datetime.datetime.today()
 
-        day_val = self.request.query_params.get('day', None)
-        month_val = self.request.query_params.get('month', None)
-        year_val = self.request.query_params.get('year', None)
+        # day_val = self.request.query_params.get('day', None)
+        # month_val = self.request.query_params.get('month', None)
+        # year_val = self.request.query_params.get('year', None)
 
         create_day_val = self.request.query_params.get('create_day', None)
         create_month_val = self.request.query_params.get('create_month', None)
         create_year_val = self.request.query_params.get('create_year', None)
 
         try:
-            if day_val is not None and month_val is not None and year_val is not None:
-                max_change_date = datetime.date(year=int(year_val), month=int(month_val), day=int(day_val))
+
+            # if day_val is not None and month_val is not None and year_val is not None:
+            #     max_change_date = datetime.date(year=int(year_val), month=int(month_val), day=int(day_val))
+            # else:
+            #     max_change_date = datetime.date(year=today.year, month=today.month, day=today.day)
+
+            time_stamp_val = float(self.request.query_params.get('update_time_stamp', None))
+
+            if time_stamp_val is not None:
+                date_value = datetime.datetime.fromtimestamp(time_stamp_val)
             else:
-                max_change_date = datetime.date(year=today.year, month=today.month, day=today.day)
+                date_value = datetime.date(year=today.year, month=today.month, day=today.day)
 
             if create_day_val is not None and create_month_val is not None and create_year_val is not None:
                 max_create_date = datetime.date(year=int(create_year_val), month=int(create_month_val), day=int(create_day_val))
@@ -94,8 +102,11 @@ class DayThemeViewSet(viewsets.ModelViewSet):
         except ValueError:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
-        changed_questions = DayQuestions.objects.filter(created_at__lte=max_create_date, updated_at__gt=max_change_date, header__active=True, header__theme__active=True, language=p_language)
-        themes_by_interval = DayTheme.objects.filter(created_at__lte=max_create_date, updated_at__gt=max_change_date, active=True)
+        # changed_questions = DayQuestions.objects.filter(created_at__lte=max_create_date, updated_at__gt=date_value, header__active=True, header__theme__active=True, language=p_language)
+        # themes_by_interval = DayTheme.objects.filter(created_at__lte=max_create_date, updated_at__gt=date_value, active=True)
+        changed_questions = DayQuestions.objects.filter(header__theme__target_date__lte=max_create_date, updated_at__gt=date_value, header__active=True, header__theme__active=True, language=p_language)
+        themes_by_interval = DayTheme.objects.filter(target_date__lte=max_create_date, updated_at__gt=date_value, active=True)
+
 
         # header_ids = list(changed_questions.values_list("header_id", flat=True))
         theme_list = []

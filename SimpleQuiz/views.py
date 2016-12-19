@@ -46,13 +46,20 @@ class QuestionHeaderViewSet(viewsets.ModelViewSet):
 
         today = datetime.datetime.today()
 
-        day_val = self.request.query_params.get('day', None)
-        month_val = self.request.query_params.get('month', None)
-        year_val = self.request.query_params.get('year', None)
+        # day_val = self.request.query_params.get('day', None)
+        # month_val = self.request.query_params.get('month', None)
+        # year_val = self.request.query_params.get('year', None)
 
         try:
-            if day_val is not None and month_val is not None and year_val is not None:
-                max_change_date = datetime.date(year=int(year_val), month=int(month_val), day=int(day_val))
+            # if day_val is not None and month_val is not None and year_val is not None:
+            #     max_change_date = datetime.date(year=int(year_val), month=int(month_val), day=int(day_val))
+            # else:
+            #     max_change_date = datetime.date(year=today.year, month=today.month, day=today.day)
+
+            time_stamp_val = float(self.request.query_params.get('update_time_stamp', None))
+
+            if time_stamp_val is not None:
+                max_change_date = datetime.datetime.fromtimestamp(time_stamp_val)
             else:
                 max_change_date = datetime.date(year=today.year, month=today.month, day=today.day)
 
