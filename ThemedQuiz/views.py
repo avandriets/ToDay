@@ -171,7 +171,8 @@ class DayThemeViewSet(viewsets.ModelViewSet):
 
         if last_date is not None:
             # themes_by_interval = DayTheme.objects.filter(target_date__range=[last_date, current_date], active=True)
-            themes_by_interval = DayTheme.objects.filter(target_date__gt=last_date, target_date__lt = current_date, active=True)
+            themes_by_interval = DayTheme.objects.filter(
+                target_date__gt=last_date, target_date__lte = current_date, active=True)
         else:
             themes_by_interval = DayTheme.objects.filter(target_date__lt=current_date, active=True)
 

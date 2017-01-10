@@ -86,7 +86,16 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
+# DATABASES = {
+#      'default': {
+#          'ENGINE': 'django.db.backends.mysql',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+#          'NAME': 'today',  # Or path to database file if using sqlite3.
+#          'USER': 'today351i',  # Not used with sqlite3.
+#          'PASSWORD': 'Qazwsx!1HuIv83',  # Not used with sqlite3.
+#          'HOST': 'today1077.cloudapp.net',  # Set to empty string for localhost. Not used with sqlite3.
+#          'PORT': '',  # Set to empty string for default. Not used with sqlite3.
+#      }
+#  }
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
